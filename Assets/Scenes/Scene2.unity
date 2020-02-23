@@ -169,7 +169,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a55e02b6dfe9e89459449dfc601db8a4, type: 2}
+  - {fileID: 2100000, guid: a88f4a783140ba94299cda249f91f6c5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -474,6 +474,7 @@ GameObject:
   - component: {fileID: 1033872456}
   - component: {fileID: 1033872461}
   - component: {fileID: 1033872460}
+  - component: {fileID: 1033872462}
   m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
@@ -511,7 +512,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0b62a433f30f9cb4cb1c36a3f8330c6f, type: 2}
+  - {fileID: 2100000, guid: 95d33e3a0dd4a0e4b9f5c23d00231eef, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -586,6 +587,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1033872462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1033872455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d7b8953dca3ca24093883c7e5616f38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: {fileID: 76359879}
+  sceneName: 
+  test:
+    m_Handle: 0
 --- !u!1 &1097839495 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100008, guid: ce816f2e6abb0504092c23ed9b970dfd,
@@ -777,7 +794,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3fdb6a9439403f241b3f59c39d1f85cc, type: 2}
+  - {fileID: 2100000, guid: b9788f960b9ec754d864c7609b64692e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
