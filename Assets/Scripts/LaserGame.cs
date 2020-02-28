@@ -33,6 +33,8 @@ public class LaserGame : MonoBehaviour
         RaycastHit hit;
         Vector3 direction = Vector3.forward;
 
+        Debug.DrawRay(lineRenderer.GetPosition(lineRenderer.positionCount - 1), direction * 20, Color.green);
+
         // Bounce the laser for every object that it hits
         while (Physics.Raycast(lineRenderer.GetPosition(lineRenderer.positionCount - 1), direction, out hit))
         {
@@ -55,10 +57,11 @@ public class LaserGame : MonoBehaviour
 
             // Check the next direction
             Physics.Raycast(lineRenderer.GetPosition(lineRenderer.positionCount - 1), direction, out hit);
+            Debug.DrawRay(lineRenderer.GetPosition(lineRenderer.positionCount - 1), direction * 20, Color.green);
         }
 
-        //// Add tail to the last hit object
-        //lineRenderer.positionCount++;
-        //lineRenderer.SetPosition(lineRenderer.positionCount - 1, direction);
+        // Add tail to the last hit object
+        lineRenderer.positionCount++;
+        lineRenderer.SetPosition(lineRenderer.positionCount - 1, (lineRenderer.GetPosition(lineRenderer.positionCount - 2) + direction * 10));
     }
 }
