@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LaserGame : MonoBehaviour
 {
     public LineRenderer lineRenderer;
     public GameObject startObject;
     public GameObject endObject;
+    public int pointerLength = 10;
 
     // Start is called before the first frame update
     void Start()
@@ -33,9 +32,7 @@ public class LaserGame : MonoBehaviour
         RaycastHit hit;
         Vector3 direction = Vector3.forward;
 
-        Debug.DrawRay(lineRenderer.GetPosition(lineRenderer.positionCount - 1), direction * 20, Color.green);
-
-        // Bounce the laser for every object that it hits
+        // Loop for every object hit by the laser
         while (Physics.Raycast(lineRenderer.GetPosition(lineRenderer.positionCount - 1), direction, out hit))
         {
             // Draw new line to the collision point
@@ -50,18 +47,15 @@ public class LaserGame : MonoBehaviour
             {
                 endObject.GetComponent<Renderer>().material.color = Color.green;
                 return;
-            } else
+            }
+            else
             {
                 endObject.GetComponent<Renderer>().material.color = Color.red;
             }
-
-            // Check the next direction
-            Physics.Raycast(lineRenderer.GetPosition(lineRenderer.positionCount - 1), direction, out hit);
-            Debug.DrawRay(lineRenderer.GetPosition(lineRenderer.positionCount - 1), direction * 20, Color.green);
         }
 
         // Add tail to the last hit object
         lineRenderer.positionCount++;
-        lineRenderer.SetPosition(lineRenderer.positionCount - 1, (lineRenderer.GetPosition(lineRenderer.positionCount - 2) + direction * 10));
+        lineRenderer.SetPosition(lineRenderer.positionCount - 1, (lineRenderer.GetPosition(lineRenderer.positionCount - 2) + direction * pointerLength));
     }
 }
