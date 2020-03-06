@@ -3,15 +3,17 @@ using UnityEngine;
 
 public class LaserGame : MonoBehaviour
 {
-    public GameObject startObject;
+    public GameObject[] startObjects;
     public GameObject reflectObject;
     public GameObject splitObject;
-    public GameObject endObject;
+    public GameObject[] endObjects;
     public GameObject borderObject;
 
     public int pointerLength = 10;
 
     public Material laserMaterial;
+
+    public Vector3 initialDirection;
 
     List<GameObject> hitObjects;
     List<GameObject> lineContainers;
@@ -19,8 +21,11 @@ public class LaserGame : MonoBehaviour
 
     void Start()
     {
-        LineRenderer lineRenderer = startObject.AddComponent<LineRenderer>();
-        lineRenderer.material = laserMaterial;
+        foreach (GameObject go in startObjects)
+        {
+            LineRenderer lineRenderer = go.AddComponent<LineRenderer>();
+            lineRenderer.material = laserMaterial;
+        }
 
         hitObjects = new List<GameObject>();
         lineContainers = new List<GameObject>();
@@ -80,7 +85,10 @@ public class LaserGame : MonoBehaviour
             Destroy(go);
         }
 
-        hitObjects.Add(RunLaser(startObject, startObject.GetComponent<LineRenderer>(), Vector3.forward));
+        foreach(GameObject go in startObjects)
+        {
+            hitObjects.Add(RunLaser(go, go.GetComponent<LineRenderer>(), initialDirection));
+        }
 
         while (hitObjects.Count != 0)
         {
@@ -109,21 +117,39 @@ public class LaserGame : MonoBehaviour
                 hitObjects.Add(RunLaser(splitObject, centerRenderer, Vector3.forward));
             }
 
-            if (hitObjects[0] == endObject)
+            if (InArray(endObjects, hitObjects[0]))
             {
-                hitEnds.Add(endObject);
-                endObject.GetComponent<Renderer>().material.color = Color.green;
+                hitEnds.Add(hitObjects[0]);
             }
 
             hitObjects.RemoveAt(0);
         }
 
-
-        if (hitEnds.Count == 0)
+        foreach (GameObject go in endObjects)
         {
-            endObject.GetComponent<Renderer>().material.color = Color.red;
+            if (InArray(hitEnds.ToArray(), go))
+            {
+                go.GetComponent<Renderer>().material.color = Color.green;
+            }
+            else
+            {
+                go.GetComponent<Renderer>().material.color = Color.red;
+            }
         }
 
         hitEnds.Clear();
+    }
+
+    bool InArray(GameObject[] array, GameObject key)
+    {
+        foreach (GameObject obj in array)
+        {
+            if (obj == key)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
