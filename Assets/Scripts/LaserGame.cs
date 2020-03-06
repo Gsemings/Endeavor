@@ -15,13 +15,16 @@ public class LaserGame : MonoBehaviour
 
     List<GameObject> hitObjects;
     List<GameObject> lineContainers;
+    List<GameObject> hitEnds;
 
     void Start()
     {
         LineRenderer lineRenderer = startObject.AddComponent<LineRenderer>();
         lineRenderer.material = laserMaterial;
+
         hitObjects = new List<GameObject>();
         lineContainers = new List<GameObject>();
+        hitEnds = new List<GameObject>();
     }
 
     GameObject RunLaser(GameObject inputObject, LineRenderer lineRenderer, Vector3 startDirection)
@@ -108,10 +111,19 @@ public class LaserGame : MonoBehaviour
 
             if (hitObjects[0] == endObject)
             {
+                hitEnds.Add(endObject);
                 endObject.GetComponent<Renderer>().material.color = Color.green;
             }
 
             hitObjects.RemoveAt(0);
         }
+
+
+        if (hitEnds.Count == 0)
+        {
+            endObject.GetComponent<Renderer>().material.color = Color.red;
+        }
+
+        hitEnds.Clear();
     }
 }
