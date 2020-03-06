@@ -1094,13 +1094,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 417254052}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.5, y: 0.246, z: 0.26}
+  m_LocalRotation: {x: 0, y: -0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 4.5, y: 0.246, z: 0.76}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.050000004}
   m_Children: []
   m_Father: {fileID: 256442746}
   m_RootOrder: 8
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -45, z: 0}
 --- !u!114 &417254054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1735,9 +1735,20 @@ MonoBehaviour:
   - {fileID: 1497214587}
   - {fileID: 160488371}
   - {fileID: 1691330424}
-  reflectObject: {fileID: 1264860471}
-  splitObject: {fileID: 417816323}
-  endObject: {fileID: 1938342079}
+  reflectObjects:
+  - {fileID: 1264860471}
+  - {fileID: 1043676675}
+  - {fileID: 722529718}
+  - {fileID: 417254052}
+  splitObjects:
+  - {fileID: 417816323}
+  - {fileID: 41382031}
+  - {fileID: 1096788859}
+  endObjects:
+  - {fileID: 1938342079}
+  - {fileID: 497789771}
+  - {fileID: 1647256925}
+  - {fileID: 1207043005}
   borderObject: {fileID: 1062355094}
   pointerLength: 10
   laserMaterial: {fileID: 2100000, guid: 76470506e8ab4f14c8d42617847cc5d5, type: 2}
@@ -1863,13 +1874,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 722529718}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.55, y: 0.246, z: 0.26}
+  m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: -4.55, y: 0.246, z: 0.76}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.050000004}
   m_Children: []
   m_Father: {fileID: 256442746}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 45, z: 0}
 --- !u!114 &722529720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2161,9 +2172,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startObjects: []
-  reflectObject: {fileID: 0}
-  splitObject: {fileID: 0}
-  endObject: {fileID: 0}
+  reflectObjects: []
+  splitObjects: []
+  endObjects: []
   borderObject: {fileID: 0}
   pointerLength: 10
   laserMaterial: {fileID: 0}

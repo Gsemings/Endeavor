@@ -5,7 +5,7 @@ public class LaserGame : MonoBehaviour
 {
     public GameObject[] startObjects;
     public GameObject[] reflectObjects;
-    public GameObject splitObject;
+    public GameObject[] splitObjects;
     public GameObject[] endObjects;
     public GameObject borderObject;
 
@@ -17,6 +17,7 @@ public class LaserGame : MonoBehaviour
 
     List<GameObject> hitObjects;
     List<GameObject> lineContainers;
+    List<GameObject> hitSplits;
     List<GameObject> hitEnds;
 
     void Start()
@@ -29,6 +30,7 @@ public class LaserGame : MonoBehaviour
 
         hitObjects = new List<GameObject>();
         lineContainers = new List<GameObject>();
+        hitSplits = new List<GameObject>();
         hitEnds = new List<GameObject>();
     }
 
@@ -93,28 +95,30 @@ public class LaserGame : MonoBehaviour
         while (hitObjects.Count != 0)
         {
 
-            if (hitObjects[0] == splitObject)
+            if (InArray(splitObjects, hitObjects[0]) && !InArray(hitSplits.ToArray(), hitObjects[0]))
             {
                 GameObject leftContainer = new GameObject();
-                leftContainer.transform.parent = splitObject.transform;
+                leftContainer.transform.parent = hitObjects[0].transform;
                 LineRenderer leftRenderer = leftContainer.AddComponent<LineRenderer>();
                 leftRenderer.material = laserMaterial;
                 lineContainers.Add(leftContainer);
-                hitObjects.Add(RunLaser(splitObject, leftRenderer, Vector3.left));
+                hitObjects.Add(RunLaser(hitObjects[0], leftRenderer, Vector3.left));
 
                 GameObject rightContainer = new GameObject();
-                rightContainer.transform.parent = splitObject.transform;
+                rightContainer.transform.parent = hitObjects[0].transform;
                 LineRenderer rightRenderer = rightContainer.AddComponent<LineRenderer>();
                 rightRenderer.material = laserMaterial;
                 lineContainers.Add(rightContainer);
-                hitObjects.Add(RunLaser(splitObject, rightRenderer, Vector3.right));
+                hitObjects.Add(RunLaser(hitObjects[0], rightRenderer, Vector3.right));
 
                 GameObject centerContainer = new GameObject();
-                centerContainer.transform.parent = splitObject.transform;
+                centerContainer.transform.parent = hitObjects[0].transform;
                 LineRenderer centerRenderer = centerContainer.AddComponent<LineRenderer>();
                 centerRenderer.material = laserMaterial;
                 lineContainers.Add(centerContainer);
-                hitObjects.Add(RunLaser(splitObject, centerRenderer, Vector3.forward));
+                hitObjects.Add(RunLaser(hitObjects[0], centerRenderer, initialDirection));
+
+                hitSplits.Add(hitObjects[0]);
             }
 
             if (InArray(endObjects, hitObjects[0]))
@@ -138,6 +142,8 @@ public class LaserGame : MonoBehaviour
         }
 
         hitEnds.Clear();
+
+        hitSplits.Clear();
     }
 
     bool InArray(GameObject[] array, GameObject key)
