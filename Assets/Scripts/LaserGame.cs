@@ -2,28 +2,26 @@
 
 public class LaserGame : MonoBehaviour
 {
-    public LineRenderer lineRenderer;
     public GameObject startObject;
     public GameObject endObject;
+    public GameObject borderObject;
+
     public int pointerLength = 10;
+
+    public Material laserMaterial;
+
+    LineRenderer lineRenderer;
 
     // Start is called before the first frame update
     void Start()
     {
-        // Warn about missing variable
-        Debug.Assert(lineRenderer != null && startObject != null && endObject != null,
-            "LaserGame is missing an instance variable!");
+        lineRenderer = startObject.AddComponent<LineRenderer>();
+        lineRenderer.material = laserMaterial;
     }
 
     // Update is called once per frame
     void Update()
     {
-        // Don't run if variable is missing
-        if (lineRenderer == null || startObject == null || endObject == null)
-        {
-            return;
-        }
-
         // Begin by rendering point 0 at the starting object
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, startObject.transform.position);
@@ -51,6 +49,11 @@ public class LaserGame : MonoBehaviour
             else
             {
                 endObject.GetComponent<Renderer>().material.color = Color.red;
+            }
+
+            if (hit.collider.transform.parent == borderObject.transform)
+            {
+                return;
             }
         }
 
