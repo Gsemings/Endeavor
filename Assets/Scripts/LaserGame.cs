@@ -4,7 +4,7 @@ using UnityEngine;
 public class LaserGame : MonoBehaviour
 {
     public GameObject[] startObjects;
-    public GameObject reflectObject;
+    public GameObject[] reflectObjects;
     public GameObject splitObject;
     public GameObject[] endObjects;
     public GameObject borderObject;
@@ -62,7 +62,7 @@ public class LaserGame : MonoBehaviour
                 return borderObject;
             }
 
-            if (hitObject != reflectObject)
+            if (!InArray(reflectObjects, hitObject))
             {
                 return hitObject;
             }
