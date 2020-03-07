@@ -11,7 +11,7 @@ public class LaserGame : MonoBehaviour
     public GameObject borderObject;
     public Vector3 initialDirection;
     public Material laserMaterial;
-    public int pointerLength = 10;
+
     public bool complete = false;
 
     List<GameObject> hitObjects;
@@ -70,10 +70,6 @@ public class LaserGame : MonoBehaviour
 
             direction = Vector3.Reflect(direction, hit.normal);
         }
-
-        lineRenderer.positionCount++;
-        lineRenderer.SetPosition(lineRenderer.positionCount - 1, (lineRenderer.GetPosition(lineRenderer.positionCount - 2) + direction * pointerLength));
-
         return null;
     }
 
@@ -155,6 +151,11 @@ public class LaserGame : MonoBehaviour
 
     bool InArray(GameObject[] array, GameObject key)
     {
+        if (array == null || key == null)
+        {
+            return false;
+        }
+
         foreach (GameObject obj in array)
         {
             if (obj == key)
