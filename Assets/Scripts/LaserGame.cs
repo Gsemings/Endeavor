@@ -7,13 +7,12 @@ public class LaserGame : MonoBehaviour
     public GameObject[] reflectObjects;
     public GameObject[] splitObjects;
     public GameObject[] endObjects;
+
     public GameObject borderObject;
-
-    public int pointerLength = 10;
-
-    public Material laserMaterial;
-
     public Vector3 initialDirection;
+    public Material laserMaterial;
+    public int pointerLength = 10;
+    public bool complete = false;
 
     List<GameObject> hitObjects;
     List<GameObject> lineContainers;
@@ -141,8 +140,16 @@ public class LaserGame : MonoBehaviour
             }
         }
 
-        hitEnds.Clear();
+        complete = true;
+        foreach (GameObject go in endObjects)
+        {
+            if (!InArray(hitEnds.ToArray(), go))
+            {
+                complete = false;
+            }
+        }
 
+        hitEnds.Clear();
         hitSplits.Clear();
     }
 
